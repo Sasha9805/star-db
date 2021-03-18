@@ -45,12 +45,18 @@ export default class PersonDetails extends Component {
   render() {
 
     const { person, loading } = this.state;
+    const { isPressed } = this.props;
+    let content;
 
-    if (!person) {
-      return <span>Select a person from a list</span>;
+    if (!person && !isPressed) {
+      content = <span>Select a person from a list</span>;
+    } else if (!person && isPressed) {
+      content = <Spinner />;
+    } else {
+      content = loading ? <Spinner /> : <PersonInfo person={person} />;
     }
 
-    const content = loading ? <Spinner /> : <PersonInfo person={person} />;
+    // const content = loading ? <Spinner /> : <PersonInfo person={person} />;
 
     return (
       <div className="person-details card">
