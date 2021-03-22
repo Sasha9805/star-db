@@ -29,7 +29,6 @@ export default class App extends Component {
   };
 
   componentDidCatch(error, errorInfo) {
-    console.log('catch');
     this.setState({hasError: true});
   }
 
@@ -58,39 +57,39 @@ export default class App extends Component {
 
         <PeoplePage />
 
-        <div className="row mb-2">
+        {/*<div className="row mb-2">*/}
 
-          <div className="col-md-6">
-            <ItemList
-              onItemSelected={this.onItemSelected}
-              getData={this.swapiService.getAllPlanets}
-              renderItem={(item) => (
-                <span>{item.name} <button>!</button></span>
-              )}/>
-          </div>
-          <div className="col-md-6">
-            <PersonDetails
-              personId={this.state.selectedPerson}
-              isPressed={this.state.isPressed}/>
-          </div>
+        {/*  <div className="col-md-6">*/}
+        {/*    <ItemList*/}
+        {/*      onItemSelected={this.onItemSelected}*/}
+        {/*      getData={this.swapiService.getAllPlanets}*/}
+        {/*      renderItem={(item) => (*/}
+        {/*        <span>{item.name} <button>!</button></span>*/}
+        {/*      )}/>*/}
+        {/*  </div>*/}
+        {/*  <div className="col-md-6">*/}
+        {/*    <PersonDetails*/}
+        {/*      personId={this.state.selectedPerson}*/}
+        {/*      isPressed={this.state.isPressed}/>*/}
+        {/*  </div>*/}
 
-        </div>
+        {/*</div>*/}
 
-        <div className="row mb-2">
+        {/*<div className="row mb-2">*/}
 
-          <div className="col-md-6">
-            <ItemList
-              onItemSelected={this.onItemSelected}
-              getData={this.swapiService.getAllStarships}
-              renderItem={(item) => item.name}/>
-          </div>
-          <div className="col-md-6">
-            <PersonDetails
-              personId={this.state.selectedPerson}
-              isPressed={this.state.isPressed}/>
-          </div>
+        {/*  <div className="col-md-6">*/}
+        {/*    <ItemList*/}
+        {/*      onItemSelected={this.onItemSelected}*/}
+        {/*      getData={this.swapiService.getAllStarships}*/}
+        {/*      renderItem={(item) => item.name}/>*/}
+        {/*  </div>*/}
+        {/*  <div className="col-md-6">*/}
+        {/*    <PersonDetails*/}
+        {/*      personId={this.state.selectedPerson}*/}
+        {/*      isPressed={this.state.isPressed}/>*/}
+        {/*  </div>*/}
 
-        </div>
+        {/*</div>*/}
 
       </div>
     );
