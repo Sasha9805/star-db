@@ -11,6 +11,8 @@ import ItemList from "../item-list";
 import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-service";
 import Row from "../row";
+import {Record} from "../item-details/item-details";
+import ErrorBoundary from "../error-boundary";
 
 export default class App extends Component {
 
@@ -49,7 +51,19 @@ export default class App extends Component {
         isPressed={false}
         getData={getPerson}
         getImageUrl={getPersonImage}
-      />
+        fields={
+          [
+            {field: 'gender', label: 'Gender'},
+            {field: 'eyeColor', label: 'Eye Color'},
+            {field: 'birthYear', label: 'Birth Year'}
+          ]
+        }
+      >
+
+        <Record field="gender" label="Gender" />
+        <Record field="eyeColor" label="Eye Color" />
+
+      </ItemDetails>
     );
 
     const starshipDetails = (
@@ -58,63 +72,72 @@ export default class App extends Component {
         isPressed={false}
         getData={getStarship}
         getImageUrl={getStarshipImage}
+        fields={
+          [
+            {field: 'model', label: 'Model'},
+            {field: 'manufacturer', label: 'Manufacturer'},
+            {field: 'costInCredits', label: 'Cost in credits'}
+          ]
+        }
       />
     );
 
     return (
-      <div className="app">
+      <ErrorBoundary>
+        <div className="app">
 
-        <Header />
-        {/*{planet}*/}
+          <Header />
+          {/*{planet}*/}
 
-        {/*<div className="row mb-2 button-row">*/}
-        {/*  <button*/}
-        {/*    className="btn btn-lg btn-warning toggle-planet"*/}
-        {/*    onClick={this.toggleRandomPlanet}>*/}
-        {/*    Toggle*/}
-        {/*  </button>*/}
-        {/*  <ErrorButton />*/}
-        {/*</div>*/}
+          {/*<div className="row mb-2 button-row">*/}
+          {/*  <button*/}
+          {/*    className="btn btn-lg btn-warning toggle-planet"*/}
+          {/*    onClick={this.toggleRandomPlanet}>*/}
+          {/*    Toggle*/}
+          {/*  </button>*/}
+          {/*  <ErrorButton />*/}
+          {/*</div>*/}
 
-        {/*<PeoplePage />*/}
+          {/*<PeoplePage />*/}
 
-        <Row left={personDetails} right={starshipDetails} />
+          <Row left={personDetails} right={starshipDetails} />
 
-        {/*<div className="row mb-2">*/}
+          {/*<div className="row mb-2">*/}
 
-        {/*  <div className="col-md-6">*/}
-        {/*    <ItemList*/}
-        {/*      onItemSelected={this.onItemSelected}*/}
-        {/*      getData={this.swapiService.getAllPlanets}*/}
-        {/*      renderItem={(item) => (*/}
-        {/*        <span>{item.name} <button>!</button></span>*/}
-        {/*      )}/>*/}
-        {/*  </div>*/}
-        {/*  <div className="col-md-6">*/}
-        {/*    <ItemDetails*/}
-        {/*      personId={this.state.selectedPerson}*/}
-        {/*      isPressed={this.state.isPressed}/>*/}
-        {/*  </div>*/}
+          {/*  <div className="col-md-6">*/}
+          {/*    <ItemList*/}
+          {/*      onItemSelected={this.onItemSelected}*/}
+          {/*      getData={this.swapiService.getAllPlanets}*/}
+          {/*      renderItem={(item) => (*/}
+          {/*        <span>{item.name} <button>!</button></span>*/}
+          {/*      )}/>*/}
+          {/*  </div>*/}
+          {/*  <div className="col-md-6">*/}
+          {/*    <ItemDetails*/}
+          {/*      personId={this.state.selectedPerson}*/}
+          {/*      isPressed={this.state.isPressed}/>*/}
+          {/*  </div>*/}
 
-        {/*</div>*/}
+          {/*</div>*/}
 
-        {/*<div className="row mb-2">*/}
+          {/*<div className="row mb-2">*/}
 
-        {/*  <div className="col-md-6">*/}
-        {/*    <ItemList*/}
-        {/*      onItemSelected={this.onItemSelected}*/}
-        {/*      getData={this.swapiService.getAllStarships}*/}
-        {/*      renderItem={(item) => item.name}/>*/}
-        {/*  </div>*/}
-        {/*  <div className="col-md-6">*/}
-        {/*    <ItemDetails*/}
-        {/*      personId={this.state.selectedPerson}*/}
-        {/*      isPressed={this.state.isPressed}/>*/}
-        {/*  </div>*/}
+          {/*  <div className="col-md-6">*/}
+          {/*    <ItemList*/}
+          {/*      onItemSelected={this.onItemSelected}*/}
+          {/*      getData={this.swapiService.getAllStarships}*/}
+          {/*      renderItem={(item) => item.name}/>*/}
+          {/*  </div>*/}
+          {/*  <div className="col-md-6">*/}
+          {/*    <ItemDetails*/}
+          {/*      personId={this.state.selectedPerson}*/}
+          {/*      isPressed={this.state.isPressed}/>*/}
+          {/*  </div>*/}
 
-        {/*</div>*/}
+          {/*</div>*/}
 
-      </div>
+        </div>
+      </ErrorBoundary>
     );
 
   }
