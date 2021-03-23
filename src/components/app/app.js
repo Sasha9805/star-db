@@ -8,8 +8,9 @@ import ErrorButton from "../error-button";
 import ErrorIndicator from "../error-indicator";
 import PeoplePage from "../people-page";
 import ItemList from "../item-list";
-import PersonDetails from "../person-details";
+import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-service";
+import Row from "../row";
 
 export default class App extends Component {
 
@@ -40,22 +41,44 @@ export default class App extends Component {
 
     const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
 
+    const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.swapiService;
+
+    const personDetails = (
+      <ItemDetails
+        itemId={11}
+        isPressed={false}
+        getData={getPerson}
+        getImageUrl={getPersonImage}
+      />
+    );
+
+    const starshipDetails = (
+      <ItemDetails
+        itemId={5}
+        isPressed={false}
+        getData={getStarship}
+        getImageUrl={getStarshipImage}
+      />
+    );
+
     return (
       <div className="app">
 
         <Header />
-        {planet}
+        {/*{planet}*/}
 
-        <div className="row mb-2 button-row">
-          <button
-            className="btn btn-lg btn-warning toggle-planet"
-            onClick={this.toggleRandomPlanet}>
-            Toggle
-          </button>
-          <ErrorButton />
-        </div>
+        {/*<div className="row mb-2 button-row">*/}
+        {/*  <button*/}
+        {/*    className="btn btn-lg btn-warning toggle-planet"*/}
+        {/*    onClick={this.toggleRandomPlanet}>*/}
+        {/*    Toggle*/}
+        {/*  </button>*/}
+        {/*  <ErrorButton />*/}
+        {/*</div>*/}
 
-        <PeoplePage />
+        {/*<PeoplePage />*/}
+
+        <Row left={personDetails} right={starshipDetails} />
 
         {/*<div className="row mb-2">*/}
 
@@ -68,7 +91,7 @@ export default class App extends Component {
         {/*      )}/>*/}
         {/*  </div>*/}
         {/*  <div className="col-md-6">*/}
-        {/*    <PersonDetails*/}
+        {/*    <ItemDetails*/}
         {/*      personId={this.state.selectedPerson}*/}
         {/*      isPressed={this.state.isPressed}/>*/}
         {/*  </div>*/}
@@ -84,7 +107,7 @@ export default class App extends Component {
         {/*      renderItem={(item) => item.name}/>*/}
         {/*  </div>*/}
         {/*  <div className="col-md-6">*/}
-        {/*    <PersonDetails*/}
+        {/*    <ItemDetails*/}
         {/*      personId={this.state.selectedPerson}*/}
         {/*      isPressed={this.state.isPressed}/>*/}
         {/*  </div>*/}
