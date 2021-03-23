@@ -7,7 +7,6 @@ import RandomPlanet from "../random-planet";
 import ErrorButton from "../error-button";
 import ErrorIndicator from "../error-indicator";
 import PeoplePage from "../people-page";
-import ItemList from "../item-list";
 import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-service";
 import Row from "../row";
@@ -51,17 +50,11 @@ export default class App extends Component {
         isPressed={false}
         getData={getPerson}
         getImageUrl={getPersonImage}
-        fields={
-          [
-            {field: 'gender', label: 'Gender'},
-            {field: 'eyeColor', label: 'Eye Color'},
-            {field: 'birthYear', label: 'Birth Year'}
-          ]
-        }
       >
 
         <Record field="gender" label="Gender" />
         <Record field="eyeColor" label="Eye Color" />
+        <Record field="birthYear" label="Birth Year" />
 
       </ItemDetails>
     );
@@ -72,14 +65,13 @@ export default class App extends Component {
         isPressed={false}
         getData={getStarship}
         getImageUrl={getStarshipImage}
-        fields={
-          [
-            {field: 'model', label: 'Model'},
-            {field: 'manufacturer', label: 'Manufacturer'},
-            {field: 'costInCredits', label: 'Cost in credits'}
-          ]
-        }
-      />
+      >
+
+        <Record field="model" label="Model" />
+        <Record field="length" label="Length" />
+        <Record field="costInCredits" label="Cost" />
+
+      </ItemDetails>
     );
 
     return (
@@ -87,54 +79,20 @@ export default class App extends Component {
         <div className="app">
 
           <Header />
-          {/*{planet}*/}
+          {planet}
 
-          {/*<div className="row mb-2 button-row">*/}
-          {/*  <button*/}
-          {/*    className="btn btn-lg btn-warning toggle-planet"*/}
-          {/*    onClick={this.toggleRandomPlanet}>*/}
-          {/*    Toggle*/}
-          {/*  </button>*/}
-          {/*  <ErrorButton />*/}
-          {/*</div>*/}
+          <div className="row mb-2 button-row">
+            <button
+              className="btn btn-lg btn-warning toggle-planet"
+              onClick={this.toggleRandomPlanet}>
+              Toggle
+            </button>
+            <ErrorButton />
+          </div>
 
-          {/*<PeoplePage />*/}
+          <PeoplePage />
 
           <Row left={personDetails} right={starshipDetails} />
-
-          {/*<div className="row mb-2">*/}
-
-          {/*  <div className="col-md-6">*/}
-          {/*    <ItemList*/}
-          {/*      onItemSelected={this.onItemSelected}*/}
-          {/*      getData={this.swapiService.getAllPlanets}*/}
-          {/*      renderItem={(item) => (*/}
-          {/*        <span>{item.name} <button>!</button></span>*/}
-          {/*      )}/>*/}
-          {/*  </div>*/}
-          {/*  <div className="col-md-6">*/}
-          {/*    <ItemDetails*/}
-          {/*      personId={this.state.selectedPerson}*/}
-          {/*      isPressed={this.state.isPressed}/>*/}
-          {/*  </div>*/}
-
-          {/*</div>*/}
-
-          {/*<div className="row mb-2">*/}
-
-          {/*  <div className="col-md-6">*/}
-          {/*    <ItemList*/}
-          {/*      onItemSelected={this.onItemSelected}*/}
-          {/*      getData={this.swapiService.getAllStarships}*/}
-          {/*      renderItem={(item) => item.name}/>*/}
-          {/*  </div>*/}
-          {/*  <div className="col-md-6">*/}
-          {/*    <ItemDetails*/}
-          {/*      personId={this.state.selectedPerson}*/}
-          {/*      isPressed={this.state.isPressed}/>*/}
-          {/*  </div>*/}
-
-          {/*</div>*/}
 
         </div>
       </ErrorBoundary>

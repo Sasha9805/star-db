@@ -10,7 +10,7 @@ export const Record = ({item, field, label}) => {
   return (
     <li key={field} className="list-group-item">
       <span className="term">{label}</span>
-      <span>{field}</span>
+      <span>{item[field]}</span>
     </li>
   );
 
@@ -58,10 +58,10 @@ export default class ItemDetails extends Component {
   render() {
 
     const { item, image, loading } = this.state;
-    const { isPressed, fields } = this.props;
+    const { isPressed } = this.props;
 
-    const children = React.Children.map(this.props.children, (child, idx) => {
-      return child;
+    const childList = React.Children.map(this.props.children, (child, idx) => {
+      return React.cloneElement(child, {item});
     });
 
     let content;
@@ -71,7 +71,7 @@ export default class ItemDetails extends Component {
     } else if (!item && isPressed) {
       content = <Spinner />;
     } else {
-      content = loading ? <Spinner /> : <ItemInfo children={children} fields={fields} image={image} item={item} />;
+      content = loading ? <Spinner /> : <ItemInfo childList={childList} image={image} item={item} />;
     }
 
     return (
@@ -86,18 +86,9 @@ export default class ItemDetails extends Component {
 
 }
 
-const ItemInfo = ({item, image, fields, children}) => {
+const ItemInfo = ({item, image, childList}) => {
 
-  const list = fields.map(({field, label}) => {
-    return (
-      <li key={field} className="list-group-item">
-        <span className="term">{label}</span>
-        <span>{item[field]}</span>
-      </li>
-    );
-  });
-
-  const { name, gender, birthYear, eyeColor } = item;
+  const { name } = item;
 
   return(
     <React.Fragment>
@@ -110,20 +101,7 @@ const ItemInfo = ({item, image, fields, children}) => {
       <div className="card-body">
         <h4>{name}</h4>
         <ul className="list-group list group-flush">
-          {/*<li className="list-group-item">*/}
-          {/*  <span className="term">Gender</span>*/}
-          {/*  <span>{gender}</span>*/}
-          {/*</li>*/}
-          {/*<li className="list-group-item">*/}
-          {/*  <span className="term">Birth Year</span>*/}
-          {/*  <span>{birthYear}</span>*/}
-          {/*</li>*/}
-          {/*<li className="list-group-item">*/}
-          {/*  <span className="term">Eye Color</span>*/}
-          {/*  <span>{eyeColor}</span>*/}
-          {/*</li>*/}
-          {/*{list}*/}
-          {children}
+          {childList}
         </ul>
         <ErrorButton />
       </div>
