@@ -9,6 +9,7 @@ import ErrorIndicator from "../error-indicator";
 import PeoplePage from "../people-page";
 import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-service";
+import DummySwapiService from "../../services/dummy-swapi-service";
 import Row from "../row";
 import {Record} from "../item-details/item-details";
 import ErrorBoundary from "../error-boundary";
@@ -21,10 +22,11 @@ import {
   PlanetDetails,
   StarshipDetails
 } from "../sw-components";
+import { SwapiServiceProvider } from "../swapi-service-context";
 
 export default class App extends Component {
 
-  swapiService = new SwapiService();
+  swapiService = new DummySwapiService();
 
   state = {
     showRandomPlanet: true,
@@ -85,37 +87,41 @@ export default class App extends Component {
 
     return (
       <ErrorBoundary>
-        <div className="app">
 
-          <Header />
-          {planet}
+        <SwapiServiceProvider value={this.swapiService}>
+          <div className="app">
 
-          <div className="row mb-2 button-row">
-            <button
-              className="btn btn-lg btn-warning toggle-planet"
-              onClick={this.toggleRandomPlanet}>
-              Toggle
-            </button>
-            <ErrorButton />
+            <Header />
+            {planet}
+
+            <div className="row mb-2 button-row">
+              <button
+                className="btn btn-lg btn-warning toggle-planet"
+                onClick={this.toggleRandomPlanet}>
+                Toggle
+              </button>
+              <ErrorButton />
+            </div>
+
+            <PersonDetails itemId={12} />
+
+            <PlanetDetails itemId={5} />
+
+            <StarshipDetails itemId={9} />
+
+            <PersonList />
+
+            <PlanetList />
+
+            <StarshipList />
+
+            {/*<PeoplePage />*/}
+
+            {/*<Row left={personDetails} right={starshipDetails} />*/}
+
           </div>
+        </SwapiServiceProvider>
 
-          <PersonDetails itemId={12} />
-
-          <PlanetDetails itemId={5} />
-
-          <StarshipDetails itemId={9} />
-
-          <PersonList />
-
-          <PlanetList />
-
-          <StarshipList />
-
-          {/*<PeoplePage />*/}
-
-          {/*<Row left={personDetails} right={starshipDetails} />*/}
-
-        </div>
       </ErrorBoundary>
     );
 
