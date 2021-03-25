@@ -26,11 +26,9 @@ import { SwapiServiceProvider } from "../swapi-service-context";
 
 export default class App extends Component {
 
-  swapiService = new SwapiService();
-
   state = {
     showRandomPlanet: true,
-    hasError: false
+    swapiService: new SwapiService()
   };
 
   toggleRandomPlanet = () => {
@@ -41,19 +39,20 @@ export default class App extends Component {
     });
   };
 
-  componentDidCatch(error, errorInfo) {
-    this.setState({hasError: true});
-  }
+  onServiceChange = () => {
+    this.setState(({swapiService}) => {
+      const Service = swapiService instanceof SwapiService ? DummySwapiService : SwapiService;
+      return {
+        swapiService: new Service()
+      };
+    });
+  };
 
   render() {
 
-    if (this.state.hasError) {
-      return <ErrorIndicator />;
-    }
-
     const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
 
-    const { getPerson, getStarship, getPersonImage, getStarshipImage, getAllPlanets } = this.swapiService;
+    const { getPerson, getStarship, getPersonImage, getStarshipImage, getAllPlanets } = this.state.swapiService;
 
     const personDetails = (
       <ItemDetails
@@ -88,10 +87,10 @@ export default class App extends Component {
     return (
       <ErrorBoundary>
 
-        <SwapiServiceProvider value={this.swapiService}>
+        <SwapiServiceProvider value={this.state.swapiService}>
           <div className="app">
 
-            <Header />
+            <Header onServiceChange={this.onServiceChange} />
             {planet}
 
             <div className="row mb-2 button-row">
