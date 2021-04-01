@@ -20,14 +20,14 @@ export default class DummySwapiService {
 
   _planets = [
     {
-      id: 1,
+      id: 2,
       name: 'Earth [TEST DATA]',
       population: '7.530.000.000',
       rotationPeriod: '23 hours 56 seconds',
       diameter: '12.742 km'
     },
     {
-      id: 2,
+      id: 3,
       name: 'Venus [TEST DATA]',
       population: 'not known',
       rotationPeriod: '243 days',
