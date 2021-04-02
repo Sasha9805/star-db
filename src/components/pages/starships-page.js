@@ -1,36 +1,45 @@
-import React, { Component } from 'react';
-import { StarshipList, StarshipDetails } from "../sw-components";
-import Row from "../row";
-import ErrorBoundary from "../error-boundary";
+import React from 'react';
+import { StarshipList } from "../sw-components";
 
-export default class StarshipsPage extends Component {
-
-  state = {
-    selectedItem: null,
-    isPressed: false
-  };
-
-  onItemSelected = (selectedItem) => {
-    this.setState({
-      selectedItem,
-      isPressed: true
-    });
-  };
-
-  render() {
-
-    const { selectedItem, isPressed } = this.state;
-
-    return (
-      <Row
-        left={<StarshipList onItemSelected={this.onItemSelected}/>}
-        right={
-          <ErrorBoundary>
-            <StarshipDetails itemId={selectedItem} isPressed={isPressed} />
-          </ErrorBoundary>
-        }
-      />
-    );
-  }
-
+const StarshipsPage = ({history}) => {
+  return (
+    <StarshipList
+      onItemSelected={(itemId) => {
+        history.push(`/starships/${itemId}`);
+      }} />
+  );
 };
+
+export default StarshipsPage;
+
+// export default class StarshipsPage extends Component {
+//
+//   state = {
+//     selectedItem: null,
+//     isPressed: false
+//   };
+//
+//   onItemSelected = (selectedItem) => {
+//     this.setState({
+//       selectedItem,
+//       isPressed: true
+//     });
+//   };
+//
+//   render() {
+//
+//     const { selectedItem, isPressed } = this.state;
+//
+//     return (
+//       <Row
+//         left={<StarshipList onItemSelected={this.onItemSelected}/>}
+//         right={
+//           <ErrorBoundary>
+//             <StarshipDetails itemId={selectedItem} isPressed={isPressed} />
+//           </ErrorBoundary>
+//         }
+//       />
+//     );
+//   }
+//
+// };
